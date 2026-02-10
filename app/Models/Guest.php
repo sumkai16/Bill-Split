@@ -12,4 +12,8 @@ class Guest extends Model
         'email',
         'invited_by',
     ];
+    public function inviter()
+    {
+        return $this->belongsTo(User::class, 'invited_by');
+    }
 }

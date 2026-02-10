@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
-    use SoftDeletes;
+    use HasFactory, Notifiable, SoftDeletes;
+   
     /**
      * The attributes that are mass assignable.
      *
@@ -48,5 +48,9 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function invitedGuests()
+    {
+        return $this->hasMany(Guest::class, 'invited_by');
     }
 }
