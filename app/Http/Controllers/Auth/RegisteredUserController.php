@@ -36,6 +36,7 @@ class RegisteredUserController extends Controller
             'nickname' => ['required', 'string', 'max:255', 'unique:'.User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'account_type' => ['required', 'string', 'in:standard,admin,sekdes'],
+            'role' => ['required', 'string', 'in:user,admin'],
             'password' => ['required',
                             'confirmed',
                             'min:8',
@@ -54,6 +55,7 @@ class RegisteredUserController extends Controller
             'nickname' => $request->nickname,
             'email' => $request->email,
             'account_type' => $request->account_type,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('nickname')->unique();
             $table->string('email')->unique();
             $table->enum('account_type', ['standard', 'admin', 'premium'])->default('standard');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

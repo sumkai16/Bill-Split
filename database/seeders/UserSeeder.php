@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'nickname' => 'testnick',
             'email' => 'test@gmail.com',
             'account_type' => 'standard',
+            'role' => 'user',
             'password' => 'qweqweqwe',
         ]);
     }

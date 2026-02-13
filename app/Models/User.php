@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -24,6 +25,7 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
         'nickname',
         'email',
         'account_type',
+        'role',
         'password',
     ];
 
@@ -52,5 +54,9 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
     public function invitedGuests()
     {
         return $this->hasMany(Guest::class, 'invited_by');
+    }
+    public function hostedBills()
+    {
+        return $this->hasMany(Bill::class, 'host_id');
     }
 }
