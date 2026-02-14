@@ -17,7 +17,7 @@ class AdminMiddleware
     {
         $user = $request->user();
 
-        if ($user && $user->account_type === 'admin') {
+       if ($request->user()?->role === 'admin') {
             return $next($request);
         }
 

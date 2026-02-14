@@ -1,4 +1,14 @@
 <x-guest-layout>
+    @if ($errors->any())
+    <div class="mb-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700">
+        <p class="font-bold">Whoops! Something went wrong.</p>
+        <ul class="mt-2 list-disc list-inside text-sm">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -35,12 +45,19 @@
             <x-input-label for="account_type" :value="__('Account Type')" />
             <select id="account_type" name="account_type" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
                 <option value="standard" {{ old('account_type') == 'standard' ? 'selected' : '' }}>Standard</option>
-                <option value="admin" {{ old('account_type') == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="sekdes" {{ old('account_type') == 'premium' ? 'selected' : '' }}>Premium</option>
+                <option value="premium" {{ old('account_type') == 'premium' ? 'selected' : '' }}>Premium</option>
             </select>
             <x-input-error :messages="$errors->get('account_type')" class="mt-2" />
-        </div> 
-
+        </div>
+        <!-- Role --> 
+        <div class="mt-4 sm:hidden">
+            <x-input-label for="role" :value="__('Role')" />
+            <select id="role" name="role" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required>
+                <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+            </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
